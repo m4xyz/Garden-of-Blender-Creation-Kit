@@ -1,0 +1,40 @@
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe.config
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.pdb
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Spectre.Console.dll
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Buffers.dll
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Memory.dll
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Spectre.Console.xml
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Buffers.xml
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Memory.xml
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.AssemblyReference.cache
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.CoreCompileInputs.cache
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.CopyComplete
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.exe
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.pdb
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\MaxKit.dll
+C:\Users\maxfx\source\repos\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\MaxKit.pdb
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe.config
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.pdb
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\MaxKit.dll
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Spectre.Console.dll
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Buffers.dll
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Memory.dll
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\MaxKit.pdb
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\Spectre.Console.xml
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Buffers.xml
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Memory.xml
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.AssemblyReference.cache
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.CoreCompileInputs.cache
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.CopyComplete
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.exe
+C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.pdb
