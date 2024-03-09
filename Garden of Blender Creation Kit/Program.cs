@@ -14,16 +14,35 @@ namespace Garden_of_Blender_Creation_Kit
     {
         static void Main(string[] args)
         {
-            int ProgramCounter = 0;
-            string userProjectDir = null;
-            string projectTemplateDir = GBCK_Core.GetTemplateDir();
-            string csvFileName = "Data.csv";
-            string projectPath = @"C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit";
+            //p1
+            Debug.WriteLine("");
+            AnsiConsole.MarkupLine("[#eb7700]BlenderProjectManager[/] v.1.0.0");
+            GBCK_Core.DrawLine();
 
-            //reads the Data.csv file to load in previous entered paths
-            if (File.Exists($@"{projectPath}\{csvFileName}"))
+            int program_counter = 0;
+
+            //the path where the new project gets created
+            string user_project_path = null;
+
+            //path to the program directory
+            string program_path = AppDomain.CurrentDomain.BaseDirectory;
+            program_path = program_path.Replace(@"\bin\Debug\", "");
+            Debug.WriteLine($"program_dir_path ::: {program_path}");
+
+            //the path of the folder which is used to create a project
+            string project_template_path = program_path + @"\ProjectTemplate";
+            Debug.WriteLine($"project_template_path ::: {project_template_path}");
+
+            //name of the .csv to save the paths
+            string csv_file_name = "data.csv";
+            string csv_file_path = $@"{program_path}\{csv_file_name}";
+            Debug.WriteLine($"csv_file_path ::: {csv_file_path}");
+
+
+            //reads the data.csv file to load in previous entered paths
+            if (File.Exists(csv_file_path))
             {
-                using (StreamReader sr = new StreamReader($@"C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\{csvFileName}"))
+                using (StreamReader sr = new StreamReader(csv_file_path))
                 {
                     string line;
                     string[] n_line_split;
@@ -33,53 +52,61 @@ namespace Garden_of_Blender_Creation_Kit
                     {
                         n_line_split = line.Split(';');
 
+                        //
+                        //IMPLEMENTATION OF SKIPPING HEADINGS OF CSV
+                        //
+
                         if (n_line_split.Length == 2)
                         {
-                            userProjectDir = n_line_split[0];
-                            projectTemplateDir = n_line_split[1];
+                            user_project_path = n_line_split[0];
+                            project_template_path = n_line_split[1];
                         }
                     }
                 }
             }
             else
             {
-                //File.Create($@"C:\Users\maxfx\Documents\Dev\C#\Projects\Garden of Blender Creation Kit\Garden of Blender Creation Kit\{csvFileName}");
+                File.Create(csv_file_path);
+                Debug.WriteLine("csv created");
             }
 
             while (true)
             {
-                ProgramCounter++;
+                program_counter++;
 
                 try
                 {
-                    while (!Directory.Exists(userProjectDir))
+                    while (!Directory.Exists(user_project_path))
                     {
-                        Console.Write("Please enter a viable path for your projects: ");
-                        userProjectDir = Console.ReadLine();
+                        Console.Write("Enter path to the directory of your projects: ");
+                        user_project_path = Console.ReadLine();
                     }
 
-                    while (!Directory.Exists(projectTemplateDir))
+                    //normaly should not be executed, because it exists in program-directory
+                    while (!Directory.Exists(project_template_path))
                     {
-                        Console.Write("Please locate the template folder for your projects: ");
-                        projectTemplateDir = Console.ReadLine();
+                        Console.Write("Enter path to the directory of the template: ");
+                        project_template_path = Console.ReadLine();
                     }
 
-                    using (StreamWriter sw = new StreamWriter($@"{projectPath}\{csvFileName}"))
+                    //writing into data.csv
+                    using (StreamWriter sw = new StreamWriter(csv_file_path))
                     {
-                        sw.WriteLine($"{userProjectDir};{projectTemplateDir}");
+                        sw.WriteLine($"{user_project_path};{project_template_path}");
                     }
 
-                    if (ProgramCounter == 1 && (GBCK_Core.Status(userProjectDir, projectTemplateDir, false) == true))
+                    if(program_counter == 1)
                     {
-                        AnsiConsole.MarkupLine("[#00ff51]STATUS OK[/]");
-                    }
-                    GBCK_Core.DrawLine();
-                    Console.WriteLine("\nType 'help' to list all available commands");
+                        GBCK_Core.Status(user_project_path, project_template_path, true);
+                        Console.WriteLine("\nType 'help' to list all available commands");
+                    }    
 
+                    //p2
                     string userInput = Console.ReadLine();
                     string[] arrUserInput = userInput.Split(' ');
                     string cmdBase = arrUserInput[0];
 
+                    Console.WriteLine();
                     switch (cmdBase)
                     {
                         //lists all available commands
@@ -91,7 +118,7 @@ namespace Garden_of_Blender_Creation_Kit
                         case "cd":
                             if (Directory.Exists(arrUserInput[1]))
                             {
-                                userProjectDir = arrUserInput[1];
+                                user_project_path = arrUserInput[1];
                             }
                             else
                             {
@@ -102,38 +129,38 @@ namespace Garden_of_Blender_Creation_Kit
                         case "cdt":
                             if (Directory.Exists(arrUserInput[1]))
                             {
-                                projectTemplateDir = arrUserInput[1];
+                                project_template_path = arrUserInput[1];
                             }
                             else
                             {
-                                Console.WriteLine($"The path you have entered could not be found >{arrUserInput[1]}<");
+                                Console.WriteLine($"Directory could not be found >{arrUserInput[1]}<");
                             }
                             break;
 
                         case "create":
-                            if (Directory.Exists(userProjectDir))
+                            if (Directory.Exists(user_project_path))
                             {
                                 AnsiConsole.Progress().Start(ctx =>
                                 {
                                     var task1 = ctx.AddTask($"[#d4af37]Creating project '{arrUserInput[1]}'[/]");
-                                    GBCK_Core.CopyFolder(projectTemplateDir, userProjectDir, arrUserInput[1]);
+                                    GBCK_Core.CopyFolder(project_template_path, user_project_path, arrUserInput[1]);
 
                                     while (!ctx.IsFinished)
                                     {
                                         task1.Increment(2.5);
                                     }
                                 });
-                                Console.WriteLine($"Successfully created [{arrUserInput[1]}]");
+                                Console.WriteLine($"Successfully created [{arrUserInput[1]}]!");
                             }
                             else
                             {
-                                Console.WriteLine("Current directory could not be found");
+                                Console.WriteLine("Directory could not be found");
                             }
                             break;
 
                         case "list":
                             string[] projectsArr;
-                            projectsArr = Directory.GetDirectories(userProjectDir);
+                            projectsArr = Directory.GetDirectories(user_project_path);
 
                             var projects = new Table();
                             projects.Border(TableBorder.Heavy);
@@ -149,27 +176,25 @@ namespace Garden_of_Blender_Creation_Kit
                             AnsiConsole.Write(projects);
                             break;
 
+                        case "status":
+                            GBCK_Core.Status(user_project_path, project_template_path, true);
+                            break;
+
                         case "exit":
                             Environment.Exit(0);
                             break;
 
-                        case "status":
-                            GBCK_Core.Status(userProjectDir, projectTemplateDir, true);
-                            break;
-
                         default:
-                            Console.WriteLine("wrong input please use 'help' to see all available commands");
+                            Console.WriteLine("Wrong input");
                             break;
                     }
                 }
                 catch (Exception exception)
                 {
                     Tool.DrawColoredLine("red");
-                    Console.WriteLine($"{exception}");
-                    Tool.DrawColoredLine("red");
+                    Console.WriteLine($"{exception}\n\n");
                     continue;
                 }
-                GBCK_Core.DrawLine();
             }
         }
     }

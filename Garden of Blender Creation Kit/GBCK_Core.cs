@@ -9,84 +9,30 @@ namespace Garden_of_Blender_Creation_Kit
 {
     public class GBCK_Core
     {
-        public static string GetTemplateDir()
+        //checks if both the project_dir and the template_dir exist and returns a bool
+        public static bool Status(string project_dir, string template_dir, bool write_dir)
         {
-            string base_dir = AppDomain.CurrentDomain.BaseDirectory; //gets the whole path with the debug folder     
-            char[] n_char_base_dir = base_dir.ToCharArray();
-            char[] n_char_letters = new char[n_char_base_dir.Length];
-            string[] n_string_words = new string[2];
-            string newPath = null;
+            bool currentDirExists = Directory.Exists(project_dir);
+            bool templateDirExists = Directory.Exists(template_dir);
 
-            for (int i = n_char_base_dir.Length, j = 0, x = 0; i > 0; i--, j++)
-            {
-                Debug.WriteLine($"i:{i}\nj:{j}\nx:{x}");
-                if (x >= 2)
-                {
-                    break;
-                }
-                else if (j != 0 && (n_char_base_dir[i - 1] == '\\'))
-                {
-                    n_string_words[x] = new string(n_char_letters);
-                    n_string_words[x] = "\\" + Tool.ClearBlanks(n_string_words[x]);
-
-                    Array.Clear(n_char_letters, 0, j);
-                    j = 0;
-                    x++;
-
-                    continue;
-                }
-                else if (n_char_base_dir[i - 1] == '\\')
-                {
-                    continue;
-                }
-                n_char_letters[j] = n_char_base_dir[i - 1];
-            }
-
-            foreach (string str in n_string_words)
-            {
-                newPath += str;
-            }
-            newPath = Tool.ReverseString(newPath);
-
-            int template_dir_length = n_char_base_dir.Length - newPath.Length;
-
-            char[] n_template_dir = new char[template_dir_length];
-            for (int i = 0; i < template_dir_length; i++)
-            {
-                n_template_dir[i] = n_char_base_dir[i];
-            }
-            string template_dir = new string(n_template_dir);
-
-            return template_dir + "ProjectTemplate";
-        }
-
-        public static bool Status(string currentDir, string templateDir, bool writeDir)
-        {
-            bool currentDirExists = Directory.Exists(currentDir);
-            bool templateDirExists = Directory.Exists(templateDir);
-
-            AnsiConsole.MarkupLine("[#eb7700]BlenderProjectManager[/] v.1.0.0");
-            DrawLine();
-
-            if (writeDir == true)
+            if (write_dir == true)
             {
                 if (currentDirExists == true)
                 {
-                    AnsiConsole.Markup($"[#ea4f56]Current[/] Directory: {currentDir} -Exists:[#eb7700]{currentDirExists}[/]");
+                    AnsiConsole.Markup($"Project directory: {project_dir} -Exists:[#eb7700]{currentDirExists}[/]\n");
                 }
                 else
                 {
-                    AnsiConsole.Markup($"[#ea4f56]Current[/] Directory: {currentDir} -Exists:[#2f4858]{currentDirExists}[/]");
+                    AnsiConsole.Markup($"Project directory: {project_dir} -Exists:[#2f4858]{currentDirExists}[/]\n");
                 }
-                Console.WriteLine();
 
                 if (templateDirExists == true)
                 {
-                    AnsiConsole.Markup($"[#ea4f56]Template[/] Directory: {templateDir} -Exists:[#eb7700]{templateDirExists}[/]");
+                    AnsiConsole.Markup($"Template directory: {template_dir} -Exists:[#eb7700]{templateDirExists}[/]\n");
                 }
                 else
                 {
-                    AnsiConsole.Markup($"[#ea4f56]Template[/] Directory: {templateDir} -Exists:[#2f4858]{templateDirExists}[/]");
+                    AnsiConsole.Markup($"Template directory: {template_dir} -Exists:[#2f4858]{templateDirExists}[/]\n");
                 }
                 Console.WriteLine();
             }
@@ -101,20 +47,12 @@ namespace Garden_of_Blender_Creation_Kit
             }
         }
 
-        public static void WriteCurrentDirectory(string dir)
-        {
-            Console.Write($"current directory: ");
-            AnsiConsole.Markup($"[#eb7700]{dir}\n[/]");
-            Console.ResetColor();
-        }
-
         public static void CopyFolder(string copyFolderDir, string pasteFolderDir, string projectName)
         {
             Stack<string> stackFolderDir = new Stack<string>();
-
             stackFolderDir.Push(copyFolderDir);
-
             pasteFolderDir = Path.Combine(pasteFolderDir, projectName);
+
             if (!Directory.Exists(pasteFolderDir))
             {
                 Directory.CreateDirectory(pasteFolderDir);
@@ -173,14 +111,14 @@ namespace Garden_of_Blender_Creation_Kit
 
         public static void WriteHelp()
         {
-            string changelog = @"cd <directory> ::: change current directory
+            string help = @"cd <directory> ::: change current directory
 cdt <directory> ::: change template directory
 create <projectName> ::: create project in current directory
 list ::: list all projects
 exit ::: closes program
 status ::: checks status";
 
-            Console.WriteLine(changelog);
+            Console.WriteLine(help);
         }
     }
 }
