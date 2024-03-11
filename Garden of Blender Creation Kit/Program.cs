@@ -16,7 +16,7 @@ namespace Garden_of_Blender_Creation_Kit
         {
             //p1
             Debug.WriteLine("");
-            AnsiConsole.MarkupLine("[#eb7700]BlenderProjectManager[/] v.1.0.0");
+            AnsiConsole.MarkupLine("[#eb7700]G.B.C.K.[/] v.1.0.0");
             GBCK_Core.DrawLine();
 
             int program_counter = 0;
@@ -30,16 +30,15 @@ namespace Garden_of_Blender_Creation_Kit
             Debug.WriteLine($"program_dir_path ::: {program_path}");
 
             //the path of the folder which is used to create a project
-            string project_template_path = program_path + @"\ProjectTemplate";
+            string project_template_path = $@"{program_path}\ProjectTemplate";
             Debug.WriteLine($"project_template_path ::: {project_template_path}");
 
             //name of the .csv to save the paths
-            string csv_file_name = "data.csv";
-            string csv_file_path = $@"{program_path}\{csv_file_name}";
+            string csv_file_path = $@"{program_path}\Data.csv";
             Debug.WriteLine($"csv_file_path ::: {csv_file_path}");
 
 
-            //reads the data.csv file to load in previous entered paths
+            //reads the Data.csv file to load in previous entered paths
             if (File.Exists(csv_file_path))
             {
                 using (StreamReader sr = new StreamReader(csv_file_path))
@@ -66,8 +65,8 @@ namespace Garden_of_Blender_Creation_Kit
             }
             else
             {
-                File.Create(csv_file_path);
-                Debug.WriteLine("csv created");
+                using (File.Create(csv_file_path))
+                    Debug.WriteLine("csv created");
             }
 
             while (true)
@@ -95,45 +94,58 @@ namespace Garden_of_Blender_Creation_Kit
                         sw.WriteLine($"{user_project_path};{project_template_path}");
                     }
 
-                    if(program_counter == 1)
+                    if (program_counter == 1)
                     {
                         GBCK_Core.Status(user_project_path, project_template_path, true);
                         Console.WriteLine("\nType 'help' to list all available commands");
-                    }    
+                    }
 
                     //p2
-                    string userInput = Console.ReadLine();
-                    string[] arrUserInput = userInput.Split(' ');
-                    string cmdBase = arrUserInput[0];
+                    //string user_input = Console.ReadLine();
+                    //string[] user_inputs = user_input.Split(' ');
+                    //string user_command = user_inputs[0];
+
+                    string user_input = Console.ReadLine();
+
+                    string[] user_inputs = user_input.Split('-');
+                    user_inputs[0] = user_inputs[0].Replace(" ", "");
+
+                    string user_command = user_inputs[0];
+
+                    for (int i = 0; i < user_inputs.Length; i++)
+                    {
+                        Debug.WriteLine($"user_inputs[{i}] ::: {user_inputs[i]}");
+                    }
+
 
                     Console.WriteLine();
-                    switch (cmdBase)
+                    switch (user_command)
                     {
                         //lists all available commands
                         case "help":
                             GBCK_Core.WriteHelp();
                             break;
 
-                        //checks if the entered directory exists, if it does 'currentDir' will be replaced with the entered one
+                        //checks if the entered directory exists, if it does 'user_project_path' will be replaced with the entered one
                         case "cd":
-                            if (Directory.Exists(arrUserInput[1]))
+                            if (Directory.Exists(user_inputs[1]))
                             {
-                                user_project_path = arrUserInput[1];
+                                user_project_path = user_inputs[1];
                             }
                             else
                             {
-                                Console.WriteLine($"The path you have entered could not be found >{arrUserInput[1]}<");
+                                Console.WriteLine($"The path you have entered could not be found >{user_inputs[1]}<");
                             }
                             break;
 
                         case "cdt":
-                            if (Directory.Exists(arrUserInput[1]))
+                            if (Directory.Exists(user_inputs[1]))
                             {
-                                project_template_path = arrUserInput[1];
+                                project_template_path = user_inputs[1];
                             }
                             else
                             {
-                                Console.WriteLine($"Directory could not be found >{arrUserInput[1]}<");
+                                Console.WriteLine($"Directory could not be found >{user_inputs[1]}<");
                             }
                             break;
 
@@ -142,15 +154,15 @@ namespace Garden_of_Blender_Creation_Kit
                             {
                                 AnsiConsole.Progress().Start(ctx =>
                                 {
-                                    var task1 = ctx.AddTask($"[#d4af37]Creating project '{arrUserInput[1]}'[/]");
-                                    GBCK_Core.CopyFolder(project_template_path, user_project_path, arrUserInput[1]);
+                                    var task1 = ctx.AddTask($"[#d4af37]Creating project '{user_inputs[1]}'[/]");
+                                    GBCK_Core.CopyFolder(project_template_path, user_project_path, user_inputs[1]);
 
                                     while (!ctx.IsFinished)
                                     {
                                         task1.Increment(2.5);
                                     }
                                 });
-                                Console.WriteLine($"Successfully created [{arrUserInput[1]}]!");
+                                Console.WriteLine($"Successfully created [{user_inputs[1]}]!");
                             }
                             else
                             {
