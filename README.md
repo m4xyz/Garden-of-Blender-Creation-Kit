@@ -1,3 +1,5 @@
+<img src="gbck.png" alt="G.B.C.K.">
+
 # Garden-of-Blender-Creation-Kit
  Simple Console-Application to create whole directories for Blender, including .blend, .pur, -files and the according folders (files, reference, render).
 
