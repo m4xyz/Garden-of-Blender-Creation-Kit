@@ -1,4 +1,4 @@
-<img src="gbck5.png" alt="G.B.C.K." size=50%>
+<img style="max-height:300px" src="gbck3.png" alt="G.B.C.K." size=50%>
 
 # Garden-of-Blender-Creation-Kit
  Simple Console-Application to create whole directories for Blender, including .blend, .pur, -files and the according folders (files, reference, render).
