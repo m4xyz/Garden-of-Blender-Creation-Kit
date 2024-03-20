@@ -43,6 +43,8 @@ namespace Garden_of_Blender_Creation_Kit
             {
                 using (StreamReader sr = new StreamReader(csv_file_path))
                 {
+                    string head = sr.ReadToEnd();
+
                     string line;
                     string[] n_line_split;
 
@@ -50,10 +52,6 @@ namespace Garden_of_Blender_Creation_Kit
                     while ((line = sr.ReadLine()) != null)
                     {
                         n_line_split = line.Split(';');
-
-                        //
-                        //IMPLEMENTATION OF SKIPPING HEADINGS OF CSV
-                        //
 
                         if (n_line_split.Length == 2)
                         {
@@ -66,7 +64,7 @@ namespace Garden_of_Blender_Creation_Kit
             else
             {
                 using (File.Create(csv_file_path))
-                    Debug.WriteLine("csv created");
+                Debug.WriteLine("csv created");
             }
 
             while (true)
@@ -91,6 +89,7 @@ namespace Garden_of_Blender_Creation_Kit
                     //writing into data.csv
                     using (StreamWriter sw = new StreamWriter(csv_file_path))
                     {
+                        sw.WriteLine("project-path;template-path");
                         sw.WriteLine($"{user_project_path};{project_template_path}");
                     }
 
@@ -107,16 +106,14 @@ namespace Garden_of_Blender_Creation_Kit
 
                     string user_input = Console.ReadLine();
 
-                    string[] user_inputs = user_input.Split('-');
-                    user_inputs[0] = user_inputs[0].Replace(" ", "");
-
+                    string[] user_inputs = GBCK_Core.ReturnUserInputArr(user_input);
                     string user_command = user_inputs[0];
 
+                    Debug.WriteLine($"user_inputs.Length ::: {user_inputs.Length}");
                     for (int i = 0; i < user_inputs.Length; i++)
                     {
                         Debug.WriteLine($"user_inputs[{i}] ::: {user_inputs[i]}");
                     }
-
 
                     Console.WriteLine();
                     switch (user_command)

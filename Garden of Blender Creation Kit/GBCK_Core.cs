@@ -9,6 +9,83 @@ namespace Garden_of_Blender_Creation_Kit
 {
     public class GBCK_Core
     {
+        public static string[] ReturnUserInputArr(string input)
+        {
+            char[] input_chars = input.ToCharArray();
+            string[] results = new string[2];
+
+            string buffer = "";
+            for (int i = 0, j = 0; i < input_chars.Length; i++)
+            {
+                if (input_chars[i] != ' ' && j == 0)
+                {
+                    buffer += input_chars[i];
+                }
+                else if(j > 0)
+                {
+                    buffer += input_chars[i];
+                }
+
+                
+                if (input_chars[i] == ' ' && j == 0)
+                {
+                    results[j] = buffer;
+
+                    buffer = "";
+                    j++;
+                }
+                else if (i == input_chars.Length - 1 && j == 0)
+                {
+                    results[j] = buffer;
+                    break;
+                }
+
+                if (i == input_chars.Length - 1 && j > 0)
+                {
+                    Debug.WriteLine("before ::: " + buffer);
+                    buffer = RemoveQuotes(buffer);
+                    Debug.WriteLine("after ::: " + buffer);
+                    results[j] = buffer;
+                }
+            }
+
+            int buffer_count_null_elements = 0;
+            for (int i = 0; i < results.Length; i++)
+            {
+                if (results[i] == null)
+                {
+                    buffer_count_null_elements++;
+                }
+            }
+            if (buffer_count_null_elements > 0)
+            {
+                Array.Resize(ref results, buffer_count_null_elements);
+            }
+
+            for(int i = 0; i < results.Length; i++)
+            {
+                Debug.WriteLine(results[i]);
+            }
+
+            return results;
+        }
+
+        public static string RemoveQuotes(string input)
+        {
+            char[] input_chars = input.ToCharArray();
+
+            string result = "";
+            for (int i = 0; i < input_chars.Length; i++)
+            {
+                if (input_chars[i] != '"')
+                {
+                    result += input_chars[i];
+                }
+            }
+
+            return result;
+        }
+
         //checks if both the project_dir and the template_dir exist and returns a bool
         public static bool Status(string project_dir, string template_dir, bool write_dir)
         {
