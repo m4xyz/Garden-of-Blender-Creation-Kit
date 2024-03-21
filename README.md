@@ -4,3 +4,5 @@
  Simple Console-Application to create whole directories for Blender, including .blend, .pur, -files and the according folders (files, reference, render).
 
 Creating a directory with the 'create InsertName' command will also rename all the files to the according project name. (InsertName.blend, InsertName.pur, etc).
+
+<img style="max-height:100px;" src="ds.gif" alt="Dwight Schrute">
