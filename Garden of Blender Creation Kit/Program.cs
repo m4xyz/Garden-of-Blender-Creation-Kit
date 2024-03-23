@@ -17,7 +17,7 @@ namespace Garden_of_Blender_Creation_Kit
             //p1
             Debug.WriteLine("");
             AnsiConsole.MarkupLine("[#eb7700]G.B.C.K.[/] v.1.0.0");
-            GBCK_Core.DrawLine();
+            //GBCK_Core.DrawLine();
 
             int program_counter = 0;
 
@@ -37,13 +37,13 @@ namespace Garden_of_Blender_Creation_Kit
             string csv_file_path = $@"{program_path}\Data.csv";
             Debug.WriteLine($"csv_file_path ::: {csv_file_path}");
 
-
             //reads the Data.csv file to load in previous entered paths
             if (File.Exists(csv_file_path))
             {
                 using (StreamReader sr = new StreamReader(csv_file_path))
                 {
-                    string head = sr.ReadToEnd();
+                    //skipping heading-line
+                    string head = sr.ReadLine();
 
                     string line;
                     string[] n_line_split;
@@ -64,7 +64,9 @@ namespace Garden_of_Blender_Creation_Kit
             else
             {
                 using (File.Create(csv_file_path))
-                Debug.WriteLine("csv created");
+                {
+                    Debug.WriteLine($"Data.csv created - location: {csv_file_path}");
+                }
             }
 
             while (true)
@@ -73,23 +75,25 @@ namespace Garden_of_Blender_Creation_Kit
 
                 try
                 {
-                    while (!Directory.Exists(user_project_path))
+                    Debug.WriteLine("user_project_path ::: " + user_project_path);
+                    while (Directory.Exists(user_project_path) == false)
                     {
                         Console.Write("Enter path to the directory of your projects: ");
-                        user_project_path = Console.ReadLine();
+                        user_project_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
                     }
 
-                    //normaly should not be executed, because it exists in program-directory
-                    while (!Directory.Exists(project_template_path))
+                    //If Data.csv is empty, it doesn't get executed
+                    Debug.WriteLine(project_template_path);
+                    while (Directory.Exists(project_template_path) == false)
                     {
                         Console.Write("Enter path to the directory of the template: ");
-                        project_template_path = Console.ReadLine();
+                        project_template_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
                     }
 
-                    //writing into data.csv
+                    //writing into Data.csv
                     using (StreamWriter sw = new StreamWriter(csv_file_path))
                     {
-                        sw.WriteLine("project-path;template-path");
+                        sw.WriteLine("Project-path;Template-path");
                         sw.WriteLine($"{user_project_path};{project_template_path}");
                     }
 
@@ -100,16 +104,14 @@ namespace Garden_of_Blender_Creation_Kit
                     }
 
                     //p2
-                    //string user_input = Console.ReadLine();
-                    //string[] user_inputs = user_input.Split(' ');
-                    //string user_command = user_inputs[0];
-
                     string user_input = Console.ReadLine();
 
+                    //REWORK
                     string[] user_inputs = GBCK_Core.ReturnUserInputArr(user_input);
+                    //
+
                     string user_command = user_inputs[0];
 
-                    Debug.WriteLine($"user_inputs.Length ::: {user_inputs.Length}");
                     for (int i = 0; i < user_inputs.Length; i++)
                     {
                         Debug.WriteLine($"user_inputs[{i}] ::: {user_inputs[i]}");
@@ -131,7 +133,7 @@ namespace Garden_of_Blender_Creation_Kit
                             }
                             else
                             {
-                                Console.WriteLine($"The path you have entered could not be found >{user_inputs[1]}<");
+                                Console.WriteLine($"The path you have entered could not be found <{user_inputs[1]}>");
                             }
                             break;
 
@@ -142,7 +144,7 @@ namespace Garden_of_Blender_Creation_Kit
                             }
                             else
                             {
-                                Console.WriteLine($"Directory could not be found >{user_inputs[1]}<");
+                                Console.WriteLine($"The directory you have entered could not be found <{user_inputs[1]}>");
                             }
                             break;
 
@@ -151,10 +153,10 @@ namespace Garden_of_Blender_Creation_Kit
                             {
                                 AnsiConsole.Progress().Start(ctx =>
                                 {
-                                    var task1 = ctx.AddTask($"[#d4af37]Creating project '{user_inputs[1]}'[/]");
+                                    var task1 = ctx.AddTask($"[#eb7700]Creating project '{user_inputs[1]}'[/]");
                                     GBCK_Core.CopyFolder(project_template_path, user_project_path, user_inputs[1]);
 
-                                    while (!ctx.IsFinished)
+                                    while (ctx.IsFinished == false)
                                     {
                                         task1.Increment(2.5);
                                     }
@@ -163,7 +165,7 @@ namespace Garden_of_Blender_Creation_Kit
                             }
                             else
                             {
-                                Console.WriteLine("Directory could not be found");
+                                Console.WriteLine("The path to your project-folder could not be found");
                             }
                             break;
 
@@ -200,7 +202,7 @@ namespace Garden_of_Blender_Creation_Kit
                 }
                 catch (Exception exception)
                 {
-                    Tool.DrawColoredLine("red");
+                    //Tool.DrawColoredLine("red");
                     Console.WriteLine($"{exception}\n\n");
                     continue;
                 }
