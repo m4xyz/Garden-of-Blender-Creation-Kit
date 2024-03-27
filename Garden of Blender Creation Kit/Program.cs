@@ -22,7 +22,7 @@ namespace Garden_of_Blender_Creation_Kit
             int program_counter = 0;
 
             //the path where the new project gets created
-            string user_project_path = null;
+            string projects_path = null;
 
             //path to the program directory
             string program_path = AppDomain.CurrentDomain.BaseDirectory;
@@ -30,8 +30,8 @@ namespace Garden_of_Blender_Creation_Kit
             Debug.WriteLine($"program_dir_path ::: {program_path}");
 
             //the path of the folder which is used to create a project
-            string project_template_path = $@"{program_path}\ProjectTemplate";
-            Debug.WriteLine($"project_template_path ::: {project_template_path}");
+            string template_path = $@"{program_path}\ProjectTemplate";
+            Debug.WriteLine($"project_template_path ::: {template_path}");
 
             //name of the .csv to save the paths
             string csv_file_path = $@"{program_path}\Data.csv";
@@ -55,8 +55,8 @@ namespace Garden_of_Blender_Creation_Kit
 
                         if (n_line_split.Length == 2)
                         {
-                            user_project_path = n_line_split[0];
-                            project_template_path = n_line_split[1];
+                            projects_path = n_line_split[0];
+                            template_path = n_line_split[1];
                         }
                     }
                 }
@@ -75,31 +75,31 @@ namespace Garden_of_Blender_Creation_Kit
 
                 try
                 {
-                    Debug.WriteLine("user_project_path ::: " + user_project_path);
-                    while (Directory.Exists(user_project_path) == false)
+                    Debug.WriteLine("user_project_path ::: " + projects_path);
+                    while (Directory.Exists(projects_path) == false)
                     {
                         Console.Write("Enter path to the directory of your projects: ");
-                        user_project_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
+                        projects_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
                     }
 
                     //If Data.csv is empty, it doesn't get executed
-                    Debug.WriteLine(project_template_path);
-                    while (Directory.Exists(project_template_path) == false)
+                    Debug.WriteLine(template_path);
+                    while (Directory.Exists(template_path) == false)
                     {
                         Console.Write("Enter path to the directory of the template: ");
-                        project_template_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
+                        template_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
                     }
 
                     //writing into Data.csv
                     using (StreamWriter sw = new StreamWriter(csv_file_path))
                     {
                         sw.WriteLine("Project-path;Template-path");
-                        sw.WriteLine($"{user_project_path};{project_template_path}");
+                        sw.WriteLine($"{projects_path};{template_path}");
                     }
 
                     if (program_counter == 1)
                     {
-                        GBCK_Core.Status(user_project_path, project_template_path, true);
+                        GBCK_Core.Status(projects_path, template_path, true);
                         Console.WriteLine("\nType 'help' to list all available commands");
                     }
 
@@ -129,18 +129,20 @@ namespace Garden_of_Blender_Creation_Kit
                         case "cd":
                             if (Directory.Exists(user_inputs[1]))
                             {
-                                user_project_path = user_inputs[1];
+                                projects_path = user_inputs[1];
+                                Console.WriteLine($"Changed project-directory to: {projects_path}");
                             }
                             else
                             {
-                                Console.WriteLine($"The path you have entered could not be found <{user_inputs[1]}>");
+                                Console.WriteLine($"Could not find the entered path: {user_inputs[1]}");
                             }
                             break;
 
                         case "cdt":
                             if (Directory.Exists(user_inputs[1]))
                             {
-                                project_template_path = user_inputs[1];
+                                template_path = user_inputs[1];
+                                Console.WriteLine($"Changed template-directory to: {template_path}");
                             }
                             else
                             {
@@ -149,19 +151,19 @@ namespace Garden_of_Blender_Creation_Kit
                             break;
 
                         case "create":
-                            if (Directory.Exists(user_project_path))
+                            if (Directory.Exists(projects_path))
                             {
                                 AnsiConsole.Progress().Start(ctx =>
                                 {
                                     var task1 = ctx.AddTask($"[#eb7700]Creating project '{user_inputs[1]}'[/]");
-                                    GBCK_Core.CopyFolder(project_template_path, user_project_path, user_inputs[1]);
+                                    GBCK_Core.CopyFolder(template_path, projects_path, user_inputs[1]);
 
                                     while (ctx.IsFinished == false)
                                     {
                                         task1.Increment(2.5);
                                     }
                                 });
-                                Console.WriteLine($"Successfully created [{user_inputs[1]}]!");
+                                Console.WriteLine($"Successfully created: {user_inputs[1]}");
                             }
                             else
                             {
@@ -171,7 +173,7 @@ namespace Garden_of_Blender_Creation_Kit
 
                         case "list":
                             string[] projectsArr;
-                            projectsArr = Directory.GetDirectories(user_project_path);
+                            projectsArr = Directory.GetDirectories(projects_path);
 
                             var projects = new Table();
                             projects.Border(TableBorder.Heavy);
@@ -188,7 +190,7 @@ namespace Garden_of_Blender_Creation_Kit
                             break;
 
                         case "status":
-                            GBCK_Core.Status(user_project_path, project_template_path, true);
+                            GBCK_Core.Status(projects_path, template_path, true);
                             break;
 
                         case "exit":
