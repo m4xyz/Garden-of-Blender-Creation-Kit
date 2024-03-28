@@ -1,4 +1,4 @@
-<img style="max-height:100px;" src="Media\gbck.png" alt="G.B.C.K." size=30%>
+<img style="max-height:70px;" src="Media\gbck.png" alt="G.B.C.K." size=30%>
 
 # Garden-of-Blender-Creation-Kit
  Simple console-application to create whole directories/projects-folders for Blender (also could be used for any other case).
@@ -22,4 +22,4 @@
   3. Run the 'setup.exe'
   4. Start 'Garden of Blender Creation Kit' as you would start any other program.
 
- Windows will try to protect you by warning you, that this software my cause damage to your computer.
+ Windows will try to protect you by warning you, that this software may cause damage to your computer.
