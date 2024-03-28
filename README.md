@@ -13,7 +13,7 @@
  <img style="max-height:100px;" src="Media\creating_project.gif" alt="Creating Project">
 
 # Notes on the template-folder
- Every file in any folder inside of the template-folder will be renamed to the project-name which is specified in the 'create'-command. This does not include the file-type/ending.
+ Every file in any folder inside of the template-folder will be renamed in the project-folder to the project-name which is specified in the 'create'-command. This does not include the file-type/ending.
  Also, exceeding a total length of somewhat over ~240 characters in the path of any subfolder of the template-folder, will leed to a crash of the program. So consider placing the template-folder somewhere where there are not much subfolders involved (for example \Documents).
 
  # Installing
