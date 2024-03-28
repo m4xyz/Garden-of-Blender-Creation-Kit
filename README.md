@@ -17,4 +17,9 @@
  Also, exceeding a total length of somewhat over ~240 characters in the path of any subfolder of the template-folder, will leed to a crash of the program. So consider placing the template-folder somewhere where there are not much subfolders involved (for example \Documents).
 
  # Installing
-  Run the 'setup.exe' and just start 'Garden of Blender Creation Kit' as you would start any other program.
+  1. Download the latest release.
+  2. Unzip the folder.
+  3. Run the 'setup.exe'
+  4. Start 'Garden of Blender Creation Kit' as you would start any other program.
+
+ Windows will try to protect you by warning you, that this software my cause damage to your computer.
