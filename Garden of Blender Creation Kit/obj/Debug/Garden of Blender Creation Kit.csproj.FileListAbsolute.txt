@@ -57,3 +57,27 @@ C:\Users\maxfx\Documents\GitHub\Garden of Blender Creation Kit\Garden of Blender
 C:\Users\maxfx\Documents\GitHub\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.CopyComplete
 C:\Users\maxfx\Documents\GitHub\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.exe
 C:\Users\maxfx\Documents\GitHub\Garden of Blender Creation Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.pdb
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe.config
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.pdb
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Spectre.Console.dll
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Buffers.dll
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Memory.dll
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\MaxKit.pdb
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Spectre.Console.xml
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Buffers.xml
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Memory.xml
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.AssemblyReference.cache
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.csproj.CoreCompileInputs.cache
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden o.E4B5FEB9.Up2Date
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.exe
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.pdb
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.exe.manifest
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\bin\Debug\Garden of Blender Creation Kit.application
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.TrustInfo.xml
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.exe.manifest
+C:\Users\maxi71255u\Documents\GitHub\Garden-of-Blender-Creation-Kit\Garden of Blender Creation Kit\obj\Debug\Garden of Blender Creation Kit.application

@@ -9,64 +9,33 @@ namespace Garden_of_Blender_Creation_Kit
 {
     public class GBCK_Core
     {
-        public static string[] ReturnUserInputArr(string input)
+        public static string[] ReturnUserInputArrV2(string input)
         {
             char[] input_chars = input.ToCharArray();
             string[] results = new string[2];
 
-            string buffer = "";
+            //only entered command
+            if (HasSpaces(input) == false)
+            {
+                //results[1] == NULL
+
+                results[0] = input;
+                return results;
+            }
+
+            //entered command and parameter
             for (int i = 0, j = 0; i < input_chars.Length; i++)
             {
-                if (input_chars[i] != ' ' && j == 0)
-                {
-                    buffer += input_chars[i];
-                }
-                else if(j > 0)
-                {
-                    buffer += input_chars[i];
-                }
+                //j == 0 -> command
+                //j == 1 -> parameter
 
-                
-                if (input_chars[i] == ' ' && j == 0)
+                if ((input_chars[i] == ' ' && j == 0) && i != input_chars.Length - 1) //skip to parameter
                 {
-                    results[j] = buffer;
-
-                    buffer = "";
+                    i++; //to skip the blank-space
                     j++;
                 }
-                else if (i == input_chars.Length - 1 && j == 0)
-                {
-                    results[j] = buffer;
-                    break;
-                }
-
-                if (i == input_chars.Length - 1 && j > 0)
-                {
-                    Debug.WriteLine("before ::: " + buffer);
-                    buffer = RemoveQuotes(buffer);
-                    Debug.WriteLine("after ::: " + buffer);
-                    results[j] = buffer;
-                }
+                results[j] += input_chars[i];
             }
-
-            int buffer_count_null_elements = 0;
-            for (int i = 0; i < results.Length; i++)
-            {
-                if (results[i] == null)
-                {
-                    buffer_count_null_elements++;
-                }
-            }
-            if (buffer_count_null_elements > 0)
-            {
-                Array.Resize(ref results, buffer_count_null_elements);
-            }
-
-            for(int i = 0; i < results.Length; i++)
-            {
-                Debug.WriteLine(results[i]);
-            }
-
             return results;
         }
 
@@ -86,7 +55,7 @@ namespace Garden_of_Blender_Creation_Kit
             return result;
         }
 
-        //checks if both the project_dir and the template_dir exist and returns a bool
+        //checks if both the project_dir and the template_dir exist and returns a boolean
         public static bool Status(string project_dir, string template_dir, bool write_dir)
         {
             bool currentDirExists = Directory.Exists(project_dir);
@@ -124,21 +93,30 @@ namespace Garden_of_Blender_Creation_Kit
             }
         }
 
-        public static void CopyFolder(string copyFolderDir, string pasteFolderDir, string projectName)
+        public static bool CopyFolder(string template_dir, string destination_dir, string project_name)
         {
-            Stack<string> stackFolderDir = new Stack<string>();
-            stackFolderDir.Push(copyFolderDir);
-            pasteFolderDir = Path.Combine(pasteFolderDir, projectName);
+            bool copying_possible = false;
 
-            if (!Directory.Exists(pasteFolderDir))
+            if (template_dir == destination_dir)
             {
-                Directory.CreateDirectory(pasteFolderDir);
+                Console.WriteLine(@"Can not create the project, it would have caused to create the project infinity times.
+The projects-path and template-path must be different");
+                return copying_possible;
+            }
+
+            Stack<string> stackFolderDir = new Stack<string>();
+            stackFolderDir.Push(template_dir);
+            destination_dir = Path.Combine(destination_dir, project_name);
+
+            if (!Directory.Exists(destination_dir))
+            {
+                Directory.CreateDirectory(destination_dir);
             }
 
             while (stackFolderDir.Count > 0)
             {
                 string currentFolderDir = stackFolderDir.Pop();
-                string currentPasteFolderDir = currentFolderDir.Replace(copyFolderDir, pasteFolderDir);
+                string currentPasteFolderDir = currentFolderDir.Replace(template_dir, destination_dir);
 
                 if (!Directory.Exists(currentPasteFolderDir))
                 {
@@ -151,7 +129,7 @@ namespace Garden_of_Blender_Creation_Kit
                 {
                     string fileNameExtension = Path.GetFileName(file);
                     string fileName = Path.GetFileNameWithoutExtension(file);
-                    string projectNameExtension = fileNameExtension.Replace(fileName, projectName);
+                    string projectNameExtension = fileNameExtension.Replace(fileName, project_name);
 
                     string pasteFilePath = Path.Combine(currentPasteFolderDir, projectNameExtension);
                     File.Copy(file, pasteFilePath, true);
@@ -164,6 +142,8 @@ namespace Garden_of_Blender_Creation_Kit
                     stackFolderDir.Push(str);
                 }
             }
+            copying_possible = true;
+            return copying_possible;
         }
 
         public static void DrawLine()
@@ -188,14 +168,28 @@ namespace Garden_of_Blender_Creation_Kit
 
         public static void WriteHelp()
         {
-            string help = @"cd <directory> ::: change current directory
-cdt <directory> ::: change template directory
-create <projectName> ::: create project in current directory
+            string help = @"cd <directory> ::: change project-directory
+cdt <directory> ::: change template-directory
+create <projectName> ::: create project in project-directory
 list ::: list all projects
 exit ::: closes program
 status ::: checks status";
 
             Console.WriteLine(help);
+        }
+
+        public static bool HasSpaces(string input)
+        {
+            char[] input_chars = input.ToCharArray();
+
+            for (int i = 0; i < input_chars.Length; i++)
+            {
+                if (input_chars[i] == ' ')
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

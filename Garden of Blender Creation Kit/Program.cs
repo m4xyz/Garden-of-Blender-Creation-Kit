@@ -16,8 +16,7 @@ namespace Garden_of_Blender_Creation_Kit
         {
             //p1
             Debug.WriteLine("");
-            AnsiConsole.MarkupLine("[#eb7700]G.B.C.K.[/] v.1.0.0");
-            //GBCK_Core.DrawLine();
+            AnsiConsole.MarkupLine("[#eb7700]G.B.C.K.[/] v.1.0.0.4");
 
             int program_counter = 0;
 
@@ -75,25 +74,25 @@ namespace Garden_of_Blender_Creation_Kit
 
                 try
                 {
-                    Debug.WriteLine("user_project_path ::: " + projects_path);
                     while (Directory.Exists(projects_path) == false)
                     {
                         Console.Write("Enter path to the directory of your projects: ");
                         projects_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
                     }
+                    Debug.WriteLine($"projects_path ::: {projects_path}");
 
                     //If Data.csv is empty, it doesn't get executed
-                    Debug.WriteLine(template_path);
                     while (Directory.Exists(template_path) == false)
                     {
                         Console.Write("Enter path to the directory of the template: ");
                         template_path = GBCK_Core.RemoveQuotes(Console.ReadLine());
                     }
+                    Debug.WriteLine($"template_path ::: {template_path}");
 
                     //writing into Data.csv
                     using (StreamWriter sw = new StreamWriter(csv_file_path))
                     {
-                        sw.WriteLine("Project-path;Template-path");
+                        sw.WriteLine("Projects-path;Template-path");
                         sw.WriteLine($"{projects_path};{template_path}");
                     }
 
@@ -107,15 +106,19 @@ namespace Garden_of_Blender_Creation_Kit
                     string user_input = Console.ReadLine();
 
                     //REWORK
-                    string[] user_inputs = GBCK_Core.ReturnUserInputArr(user_input);
+                    string[] user_inputs = GBCK_Core.ReturnUserInputArrV2(user_input);
                     //
 
                     string user_command = user_inputs[0];
+                    string user_parameter = user_inputs[1];
 
-                    for (int i = 0; i < user_inputs.Length; i++)
+                    if (user_parameter != null)
                     {
-                        Debug.WriteLine($"user_inputs[{i}] ::: {user_inputs[i]}");
+                        user_parameter = GBCK_Core.RemoveQuotes(user_parameter);
                     }
+
+                    Debug.WriteLine($"user_command ::: {user_command}");
+                    Debug.WriteLine($"user_parameter ::: {user_parameter}");
 
                     Console.WriteLine();
                     switch (user_command)
@@ -127,47 +130,70 @@ namespace Garden_of_Blender_Creation_Kit
 
                         //checks if the entered directory exists, if it does 'user_project_path' will be replaced with the entered one
                         case "cd":
-                            if (Directory.Exists(user_inputs[1]))
+                            if (Directory.Exists(user_parameter))
                             {
-                                projects_path = user_inputs[1];
+                                projects_path = user_parameter;
                                 Console.WriteLine($"Changed project-directory to: {projects_path}");
                             }
                             else
                             {
-                                Console.WriteLine($"Could not find the entered path: {user_inputs[1]}");
+                                Console.WriteLine($"Could not find the entered path to the directory of your projects: {user_parameter}");
                             }
                             break;
 
                         case "cdt":
-                            if (Directory.Exists(user_inputs[1]))
+                            if (Directory.Exists(user_parameter))
                             {
-                                template_path = user_inputs[1];
+                                template_path = user_parameter;
                                 Console.WriteLine($"Changed template-directory to: {template_path}");
                             }
                             else
                             {
-                                Console.WriteLine($"The directory you have entered could not be found <{user_inputs[1]}>");
+                                Console.WriteLine($"Could not find the entered path to the directory of the template: {user_parameter}");
                             }
                             break;
 
                         case "create":
+                            if(Directory.Exists($@"{projects_path}\{user_parameter}"))
+                            {
+                                string choice = "";
+                                Console.Write($"'{user_parameter}' already exists, are you sure you still want to create a new project? (old files could be overwritten!)|(y/n):");
+                                choice = Console.ReadLine();
+
+                                if(choice == "n")
+                                {
+                                    break;
+                                }
+                            }
+
                             if (Directory.Exists(projects_path))
                             {
+                                bool task_finished = false;
                                 AnsiConsole.Progress().Start(ctx =>
                                 {
-                                    var task1 = ctx.AddTask($"[#eb7700]Creating project '{user_inputs[1]}'[/]");
-                                    GBCK_Core.CopyFolder(template_path, projects_path, user_inputs[1]);
+                                    var task1 = ctx.AddTask($"[#eb7700]Creating project '{user_parameter}'...[/]");
+                                    bool task_start = GBCK_Core.CopyFolder(template_path, projects_path, user_parameter);
 
-                                    while (ctx.IsFinished == false)
+                                    while (ctx.IsFinished == false && task_start == true)
                                     {
                                         task1.Increment(2.5);
                                     }
+
+                                    if(task1.IsFinished)
+                                    {
+                                        task_finished = true;
+                                    }
+                                    Debug.WriteLine($"task_finished ::: {task_finished}");
                                 });
-                                Console.WriteLine($"Successfully created: {user_inputs[1]}");
+
+                                if (task_finished == true)
+                                {
+                                    Console.WriteLine($"Successfully created the project-folder: {user_parameter}");
+                                }
                             }
                             else
                             {
-                                Console.WriteLine("The path to your project-folder could not be found");
+                                Console.WriteLine("Could not find the entered path to the directory of your projects :(");
                             }
                             break;
 
@@ -198,14 +224,13 @@ namespace Garden_of_Blender_Creation_Kit
                             break;
 
                         default:
-                            Console.WriteLine("Wrong input");
+                            Console.WriteLine("The command you have entered does not exist");
                             break;
                     }
                 }
                 catch (Exception exception)
                 {
-                    //Tool.DrawColoredLine("red");
-                    Console.WriteLine($"{exception}\n\n");
+                    AnsiConsole.WriteException(exception);
                     continue;
                 }
             }
