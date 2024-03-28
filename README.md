@@ -1,4 +1,4 @@
-<img style="max-height:100px;" src="Media\gbck.png" alt="G.B.C.K." size=50%>
+<img style="max-height:100px;" src="Media\gbck.png" alt="G.B.C.K." size=30%>
 
 # Garden-of-Blender-Creation-Kit
  Simple console-application to create whole directories/projects-folders for Blender (also could be used for any other case).
